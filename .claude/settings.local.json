@@ -2,7 +2,19 @@
   "permissions": {
     "allow": [
       "Bash(npm --version)",
-      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)"
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(sed -i 's/ease: \"easeOut\"/ease: \"easeOut\" as const/g' app/portfolio/\\\\\\\\[id\\\\\\\\]/page.tsx components/ContactSection.tsx app/page.tsx components/AboutSection.tsx components/HeroSection.tsx components/Navbar.tsx components/IntroScreen.tsx && echo \"Done\")",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/)",
+      "Bash(npx playwright *)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Bash(node -e ' *)",
+      "Bash(pkill -f \"next dev\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\PC\\portfolio\\app\\portfolio\\[id\\]"
     ]
   }
 }
