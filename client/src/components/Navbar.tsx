@@ -32,7 +32,7 @@ export default function Navbar({ activeSection, onNavClick }: {
         {NAV.map(({ id, label }) => (
           <button key={id} onClick={() => onNavClick(id)}
             className="relative text-xs font-nerv tracking-widest transition-colors duration-200 pb-1 uppercase"
-            style={{ color: activeSection === id ? '#00FF41' : 'rgba(232,232,232,0.38)' }}>
+            style={{ color: activeSection === id ? '#00FF41' : 'rgba(232,232,232,0.62)' }}>
             {label}
             <AnimatePresence>
               {activeSection === id && (

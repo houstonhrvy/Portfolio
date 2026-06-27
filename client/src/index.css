@@ -96,6 +96,61 @@ body::after {
 }
 .nerv-flicker { animation: nerv-flicker 9s ease-in-out infinite; }
 
+/* Eva sphere effects */
+@keyframes eva-radar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.eva-radar-sweep      { animation: eva-radar 2.8s linear infinite; }
+.eva-radar-sweep-slow { animation: eva-radar 7s linear infinite reverse; }
+
+@keyframes eva-core {
+  0%, 100% { opacity: 0.7; transform: translate(-50%,-50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%,-50%) scale(1.35); }
+}
+.eva-core-pulse { animation: eva-core 2.2s ease-in-out infinite; }
+
+@keyframes at-hex-pulse {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 1.4; }
+}
+.at-field-hex { animation: at-hex-pulse 3.5s ease-in-out infinite; }
+
+@keyframes eva-alert {
+  0%, 100% { opacity: 0; }
+  10%, 30%, 50%, 70%, 90% { opacity: 1; }
+  20%, 40%, 60%, 80% { opacity: 0.3; }
+}
+.eva-alert-flash  { animation: eva-alert 0.5s step-end infinite; }
+
+@keyframes eva-border-flash {
+  0%, 100% { opacity: 0.4; } 50% { opacity: 1; }
+}
+.eva-alert-border { animation: eva-border-flash 0.3s ease-in-out infinite; }
+
+/* Glitch photo frame */
+@keyframes glitch-r {
+  0%, 82%, 100% { transform: translate(0); opacity: 0; }
+  83%            { transform: translate(4px, 0); opacity: 0.38; clip-path: inset(20% 0 55% 0); }
+  84%            { transform: translate(-4px, 0); opacity: 0.32; clip-path: inset(60% 0 15% 0); }
+  85%            { transform: translate(3px, 0); opacity: 0.28; clip-path: inset(40% 0 35% 0); }
+  86%            { transform: translate(0); opacity: 0; }
+}
+@keyframes glitch-b {
+  0%, 82%, 100% { transform: translate(0); opacity: 0; }
+  83%            { transform: translate(-5px, 1px); opacity: 0.3; clip-path: inset(30% 0 45% 0); }
+  84%            { transform: translate(4px, -1px); opacity: 0.26; clip-path: inset(65% 0 10% 0); }
+  85%            { transform: translate(-3px, 0); opacity: 0.22; clip-path: inset(10% 0 75% 0); }
+  86%            { transform: translate(0); opacity: 0; }
+}
+@keyframes glitch-slice {
+  0%, 82%, 100% { transform: translate(0); clip-path: none; }
+  83%            { transform: translate(-3px); clip-path: inset(22% 0 52% 0); }
+  84%            { transform: translate(3px); clip-path: inset(58% 0 18% 0); }
+  85%            { transform: translate(-2px); clip-path: inset(40% 0 40% 0); }
+  86%            { transform: translate(0); clip-path: none; }
+}
+.glitch-base { animation: glitch-slice 7s steps(1) infinite; }
+.glitch-r    { animation: glitch-r 7s steps(1) infinite; }
+.glitch-b    { animation: glitch-b 7s steps(1) infinite; }
+
 /* AT Field pulse (border animation) */
 @keyframes at-field {
   0%, 100% { border-color: rgba(123,47,190,0.25); }
