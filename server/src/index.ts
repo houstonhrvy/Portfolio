@@ -11,7 +11,13 @@ const app = express()
 const PORT = process.env.PORT || 5000
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/houston-portfolio'
 
-app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:4173'] }))
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:4173',
+    ...(process.env.CLIENT_URL ? [process.env.CLIENT_URL] : []),
+  ],
+}))
 app.use(express.json())
 
 app.use('/api/comments', commentsRouter)

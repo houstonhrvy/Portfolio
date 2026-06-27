@@ -6,6 +6,7 @@ import HeroSection from '@/components/HeroSection'
 import AboutSection from '@/components/AboutSection'
 import PortfolioSection from '@/components/PortfolioSection'
 import ContactSection from '@/components/ContactSection'
+import ThirdImpact from '@/components/ThirdImpact'
 
 const SECTIONS = ['home', 'about', 'portfolio', 'contact']
 
@@ -44,6 +45,7 @@ export default function HomePage() {
         {!showIntro && (
           <motion.div key="main" initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             transition={{ duration: 0.5, ease: 'easeOut' as const }}>
+            <ThirdImpact />
             <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
             <HeroSection />
             <AboutSection />
