@@ -17,18 +17,38 @@ const statItems = [
   { label: 'COMPLETED WORKS', value: stats.completedWorks, Icon: CheckCircle,  suffix: ''  },
 ]
 
-function StatCard({ label, value, suffix, Icon, inView }: {
-  label: string; value: number; suffix: string; Icon: React.ElementType; inView: boolean
+function StatCard({ label, value, suffix, Icon, inView, index }: {
+  label: string; value: number; suffix: string; Icon: React.ElementType; inView: boolean; index: number
 }) {
   return (
-    <div className="flex-1 min-w-[90px] px-4 py-4 flex flex-col gap-2 hover:border-[#7B2FBE]/40 transition-colors duration-300"
-      style={{ border: '1px solid rgba(123,47,190,0.22)', background: 'rgba(123,47,190,0.05)' }}>
-      <Icon size={16} style={{ color: 'rgba(123,47,190,0.6)' }} />
+    <motion.div
+      initial={{ opacity: 0, y: 24, scale: 0.92 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 0.45, delay: 0.1 + index * 0.12, ease: 'easeOut' }}
+      whileHover={{ y: -4 }}
+      className="stat-card relative flex-1 min-w-[90px] px-4 py-4 flex flex-col gap-2 overflow-hidden"
+      style={{ border: '1px solid rgba(123,47,190,0.22)', background: 'rgba(123,47,190,0.05)', willChange: 'transform' }}>
+
+      {/* top accent line that draws in */}
+      <motion.div
+        className="absolute top-0 left-0 h-[2px]"
+        style={{ background: 'linear-gradient(90deg,#7B2FBE,#00FF41)' }}
+        initial={{ width: '0%' }}
+        animate={inView ? { width: '100%' } : {}}
+        transition={{ duration: 0.6, delay: 0.3 + index * 0.12, ease: 'easeOut' }}
+      />
+
+      <motion.div
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: index * 0.3 }}
+      >
+        <Icon size={16} style={{ color: 'rgba(123,47,190,0.7)' }} />
+      </motion.div>
       <div className="text-2xl font-bold tabular-nums font-nerv" style={{ color: '#00FF41' }}>
-        {inView ? <CountUp end={value} duration={1.8} delay={0.2} suffix={suffix} /> : '0'}
+        {inView ? <CountUp end={value} duration={1.8} delay={0.2 + index * 0.12} suffix={suffix} /> : '0'}
       </div>
       <p className="text-[10px] font-nerv tracking-widest text-white/45 uppercase">{label}</p>
-    </div>
+    </motion.div>
   )
 }
 
@@ -130,6 +150,34 @@ function PilotPhoto() {
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
           style={{ position: 'absolute', left: 0, right: 0, height: 3, pointerEvents: 'none', background: 'linear-gradient(to right,transparent,rgba(0,255,65,0.9) 40%,#00FF41 50%,rgba(0,255,65,0.9) 60%,transparent)', boxShadow: '0 0 8px #00FF41' }}
         />
+
+        {/* Targeting reticle — crosshair + ticks, fades in after reveal */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={revealed ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
+        >
+          {/* horizontal + vertical crosshair lines */}
+          <div style={{ position: 'absolute', top: '38%', left: 0, right: 0, height: 1, background: 'linear-gradient(to right, transparent, rgba(0,255,65,0.55) 15%, rgba(0,255,65,0.55) 85%, transparent)' }} />
+          <div style={{ position: 'absolute', left: '50%', top: '30%', bottom: '48%', width: 1, background: 'linear-gradient(to bottom, transparent, rgba(0,255,65,0.5))' }} />
+
+          {/* reticle circle at the eye-line */}
+          <motion.div
+            animate={{ scale: [1, 1.08, 1], opacity: [0.55, 0.85, 0.55] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ position: 'absolute', top: '38%', left: '50%', width: 34, height: 34, transform: 'translate(-50%,-50%)', border: '1px solid rgba(0,255,65,0.6)', borderRadius: '50%' }}
+          />
+          <div style={{ position: 'absolute', top: '38%', left: '50%', width: 4, height: 4, transform: 'translate(-50%,-50%)', borderRadius: '50%', background: '#00FF41', boxShadow: '0 0 6px #00FF41' }} />
+
+          {/* corner tick marks, small */}
+          {[
+            { top: '30%', left: '30%' }, { top: '30%', right: '30%' },
+            { bottom: '52%', left: '30%' }, { bottom: '52%', right: '30%' },
+          ].map((pos, i) => (
+            <div key={i} style={{ position: 'absolute', width: 8, height: 8, borderTop: i < 2 ? '1px solid rgba(0,255,65,0.45)' : 'none', borderBottom: i >= 2 ? '1px solid rgba(0,255,65,0.45)' : 'none', borderLeft: i % 2 === 0 ? '1px solid rgba(0,255,65,0.45)' : 'none', borderRight: i % 2 === 1 ? '1px solid rgba(0,255,65,0.45)' : 'none', ...pos }} />
+          ))}
+        </motion.div>
       </motion.div>
 
       {/* Corner brackets — animate in after reveal */}
@@ -176,7 +224,7 @@ export default function AboutSection() {
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
 
-        <div className="flex flex-col md:flex-row gap-10 md:gap-16 lg:gap-24 items-start">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-16 lg:gap-24 items-center md:items-start">
 
           {/* Left — text */}
           <div className="flex-1 flex flex-col gap-5 md:gap-6">
@@ -210,14 +258,20 @@ export default function AboutSection() {
 
             <motion.div variants={fadeUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="flex flex-wrap gap-3 mt-1">
-              <button className="flex items-center gap-2 px-5 py-2.5 text-white text-sm font-bold font-nerv tracking-wide hover:opacity-85 active:scale-[0.97] transition-all duration-200"
-                style={{ background: '#7B2FBE' }}>
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.96 }}
+                className="btn-glow-purple flex items-center gap-2 px-5 py-2.5 text-white text-sm font-bold font-nerv tracking-wide"
+                style={{ background: '#7B2FBE', willChange: 'transform' }}>
                 <Download size={15} /> DOWNLOAD CV
-              </button>
-              <button className="flex items-center gap-2 px-5 py-2.5 text-sm font-nerv tracking-wide active:scale-[0.97] transition-all duration-200"
-                style={{ border: '1px solid rgba(123,47,190,0.4)', color: 'rgba(123,47,190,0.95)' }}>
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.96 }}
+                className="btn-glow-green flex items-center gap-2 px-5 py-2.5 text-sm font-nerv tracking-wide"
+                style={{ border: '1px solid rgba(123,47,190,0.4)', color: 'rgba(123,47,190,0.95)', willChange: 'transform' }}>
                 VIEW PROJECTS <ArrowRight size={14} />
-              </button>
+              </motion.button>
             </motion.div>
           </div>
 
@@ -228,11 +282,9 @@ export default function AboutSection() {
         </div>
 
         {/* Stats */}
-        <motion.div ref={ref} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }} transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap gap-3 mt-12 md:mt-14">
-          {statItems.map((s) => <StatCard key={s.label} {...s} inView={inView} />)}
-        </motion.div>
+        <div ref={ref} className="flex flex-wrap gap-3 mt-12 md:mt-14">
+          {statItems.map((s, i) => <StatCard key={s.label} {...s} inView={inView} index={i} />)}
+        </div>
       </div>
     </section>
   )

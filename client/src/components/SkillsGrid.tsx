@@ -30,7 +30,7 @@ const SKILLS = [
   { name: 'Vite',       src: `${CDN}/vitejs/vitejs-original.svg`,             color: '#646CFF' },
   { name: 'Vercel',     src: `${SI}/vercel/ffffff`,                           color: '#ffffff' },
   { name: 'Netlify',    src: `${SI}/netlify/00C7B7`,                          color: '#00C7B7' },
-  { name: 'Adobe',      src: `${SI}/adobe/FF0000`,                            color: '#FF0000' },
+  { name: 'Photoshop',  src: `${CDN}/photoshop/photoshop-original.svg`,       color: '#31A8FF' },
 ]
 
 function SkillIcon({ name, src, color }: { name: string; src: string; color: string }) {
@@ -39,18 +39,10 @@ function SkillIcon({ name, src, color }: { name: string; src: string; color: str
   return (
     <motion.div
       onClick={() => { setActive(true); setTimeout(() => setActive(false), 400) }}
-      whileHover={{
-        y: -6,
-        scale: 1.12,
-        borderColor: `${color}70`,
-        boxShadow: `0 0 18px ${color}45, 0 6px 24px rgba(0,0,0,0.7)`,
-        background: 'rgba(10,0,20,0.92)',
-      }}
+      whileHover={{ y: -6, scale: 1.12 }}
       whileTap={{ scale: 0.88 }}
-      animate={active ? {
-        boxShadow: [`0 0 0px ${color}00`, `0 0 28px ${color}99`, `0 0 0px ${color}00`],
-      } : {}}
-      transition={{ duration: 0.18 }}
+      transition={{ duration: 0.15 }}
+      className={`skill-icon${active ? ' skill-icon-active' : ''}`}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -65,6 +57,8 @@ function SkillIcon({ name, src, color }: { name: string; src: string; color: str
         userSelect: 'none',
         WebkitUserSelect: 'none',
         minWidth: 0,
+        willChange: 'transform',
+        ['--glow-color' as string]: color,
       }}
     >
       <img

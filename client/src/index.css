@@ -17,6 +17,65 @@
   ::-webkit-scrollbar-thumb:hover { background: #9B4DCA; }
 }
 
+.op-card {
+  border: 1px solid rgba(123, 47, 190, 0.2);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.op-card:hover {
+  border-color: rgba(123, 47, 190, 0.5);
+  box-shadow: 0 0 28px rgba(123, 47, 190, 0.18), 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+.tech-tile {
+  cursor: pointer;
+}
+.tech-tile-icon {
+  transition: filter 0.15s ease;
+}
+.tech-tile:hover .tech-tile-icon {
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--tech-glow) 70%, transparent));
+}
+
+.stat-card {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.stat-card:hover {
+  border-color: rgba(0, 255, 65, 0.45);
+  box-shadow: 0 0 24px rgba(0, 255, 65, 0.15), 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.btn-glow-purple {
+  transition: box-shadow 0.15s ease;
+}
+.btn-glow-purple:hover {
+  box-shadow: 0 0 24px rgba(123, 47, 190, 0.55), 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.btn-glow-green {
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+.btn-glow-green:hover {
+  border-color: rgba(0, 255, 65, 0.7);
+  color: #00FF41;
+  background-color: rgba(0, 255, 65, 0.06);
+}
+
+.skill-icon {
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.skill-icon:hover {
+  border-color: color-mix(in srgb, var(--glow-color) 45%, transparent);
+  background-color: rgba(10, 0, 20, 0.92);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--glow-color) 30%, transparent), 0 6px 24px rgba(0, 0, 0, 0.7);
+}
+@keyframes skill-icon-pulse {
+  0%, 100% { box-shadow: 0 0 0px transparent; }
+  50% { box-shadow: 0 0 28px color-mix(in srgb, var(--glow-color) 65%, transparent); }
+}
+.skill-icon-active {
+  animation: skill-icon-pulse 0.4s ease;
+}
+
 @layer utilities {
   /* Unit-01 purple grid */
   .bg-grid-pattern {

@@ -7,6 +7,8 @@ export interface Project {
   features: string[]
   liveLink?: string
   repoLink?: string
+  previewImage: string
+  status: 'LIVE' | 'IN PROGRESS'
 }
 
 export interface Certificate {
@@ -23,6 +25,9 @@ export interface TechItem {
   abbr: string
   color: string
   bg: string
+  icon: string
+  category: string
+  desc: string
 }
 
 export const projects: Project[] = [
@@ -32,7 +37,7 @@ export const projects: Project[] = [
     description:
       'A travel and tours company website featuring tour packages, booking inquiries, and a modern responsive design.',
     longDescription:
-      'WanderWave Travel and Tours is a full-featured travel company website designed to showcase tour packages and destinations across the Philippines. Built with a focus on conversion, user experience, and clean visual design to drive booking inquiries.',
+      'WanderWave Travel and Tours is a full-featured travel company website designed to showcase tour packages and destinations across the Philippines. Built with a focus on conversion, user experience, and clean visual design to drive booking inquiries — from the landing page down to the inquiry form.',
     technologies: ['HTML5', 'CSS3', 'JavaScript', 'GoHighLevel'],
     features: [
       'Responsive multi-section landing page',
@@ -41,22 +46,44 @@ export const projects: Project[] = [
     ],
     liveLink: 'https://wanderwaveph.com',
     repoLink: undefined,
+    previewImage: '/assets/projects/wanderwave.jpg',
+    status: 'LIVE',
   },
   {
-    id: 'portfolio-website',
-    title: 'Developer Portfolio',
+    id: 'telexph',
+    title: 'Telex PH',
     description:
-      'A modern dark-themed portfolio website built with React, Vite, and Framer Motion animations.',
+      'Corporate website for Telex PH, showcasing services, company information, and client engagement channels.',
     longDescription:
-      'A personal developer portfolio website featuring a physics-based lanyard card, typewriter animation, smooth scroll-triggered reveals, tabbed project showcase, and an interactive guestbook — built with Vite + React and a MongoDB-backed Express API.',
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Express', 'MongoDB'],
+      'Telex PH is the company website built to represent the brand online — presenting its services, values, and contact channels in a clean, professional layout. Developed while working as a Web Developer at Telex PH, with a focus on performance, clarity, and a maintainable front end.',
+    technologies: ['HTML5', 'CSS3', 'JavaScript', 'PHP'],
     features: [
-      'Physics-based interactive lanyard ID card',
-      'Scroll-triggered animations and count-up stats',
-      'MongoDB-backed guestbook and contact form',
+      'Company services and information pages',
+      'Responsive layout across devices',
+      'Optimized load performance and clean UI',
     ],
-    liveLink: undefined,
-    repoLink: 'https://github.com/houstonhrvy',
+    liveLink: 'https://telexph.com',
+    repoLink: undefined,
+    previewImage: '/assets/projects/telexph.jpg',
+    status: 'LIVE',
+  },
+  {
+    id: 'hostops',
+    title: 'HostOps',
+    description:
+      'A property and hosting operations platform designed to streamline management workflows for hosts.',
+    longDescription:
+      'HostOps is a platform built to help property hosts manage their operations more efficiently — bringing bookings, tasks, and property information together in one place. Designed with a focus on usability and a modern interface to simplify day-to-day hosting workflows.',
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js'],
+    features: [
+      'Centralized property operations dashboard',
+      'Streamlined booking and task workflows',
+      'Clean, modern responsive interface',
+    ],
+    liveLink: 'https://hostops.online',
+    repoLink: undefined,
+    previewImage: '/assets/projects/hostops.jpg',
+    status: 'LIVE',
   },
 ]
 
@@ -71,19 +98,34 @@ export const certificates: Certificate[] = [
   },
 ]
 
+const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
+const SIMPLEICON = 'https://cdn.simpleicons.org'
+
 export const techStack: TechItem[] = [
-  { name: 'React.js', abbr: 'Re', color: '#61DAFB', bg: '#0e2a35' },
-  { name: 'TypeScript', abbr: 'TS', color: '#3178C6', bg: '#0d1f3c' },
-  { name: 'Tailwind', abbr: 'Tw', color: '#38BDF8', bg: '#0c2030' },
-  { name: 'Next.js', abbr: 'N', color: '#e0e0e0', bg: '#1a1a1a' },
-  { name: 'HTML5', abbr: 'H5', color: '#E34F26', bg: '#2e1208' },
-  { name: 'CSS3', abbr: 'CS', color: '#264DE4', bg: '#0d1530' },
-  { name: 'JavaScript', abbr: 'JS', color: '#F7DF1E', bg: '#2d2900' },
-  { name: 'PHP', abbr: 'PH', color: '#A855F7', bg: '#1d0b30' },
-  { name: 'MySQL', abbr: 'My', color: '#4479A1', bg: '#0d1e2f' },
-  { name: 'MongoDB', abbr: 'Mo', color: '#47A248', bg: '#0a1f0d' },
-  { name: 'Express', abbr: 'Ex', color: '#e0e0e0', bg: '#1a1a1a' },
-  { name: 'Node.js', abbr: 'No', color: '#339933', bg: '#0a1f0a' },
+  { name: 'React.js', abbr: 'Re', color: '#61DAFB', bg: '#0e2a35', icon: `${DEVICON}/react/react-original.svg`,
+    category: 'UI FRAMEWORK', desc: 'Component-based library for building reactive interfaces. Used across projects for dynamic, state-driven UIs.' },
+  { name: 'TypeScript', abbr: 'TS', color: '#3178C6', bg: '#0d1f3c', icon: `${DEVICON}/typescript/typescript-original.svg`,
+    category: 'TYPED SUPERSET', desc: 'Adds static typing to JavaScript, catching errors early and keeping larger codebases maintainable.' },
+  { name: 'Tailwind', abbr: 'Tw', color: '#38BDF8', bg: '#0c2030', icon: `${DEVICON}/tailwindcss/tailwindcss-original.svg`,
+    category: 'CSS FRAMEWORK', desc: 'Utility-first styling used to compose responsive, consistent designs directly in markup.' },
+  { name: 'Next.js', abbr: 'N', color: '#e0e0e0', bg: '#1a1a1a', icon: `${SIMPLEICON}/nextdotjs/ffffff`,
+    category: 'REACT FRAMEWORK', desc: 'Adds routing, SSR, and production tooling on top of React for full applications.' },
+  { name: 'HTML5', abbr: 'H5', color: '#E34F26', bg: '#2e1208', icon: `${DEVICON}/html5/html5-original.svg`,
+    category: 'MARKUP LANGUAGE', desc: 'Semantic structure and accessibility foundation for every page built.' },
+  { name: 'CSS3', abbr: 'CS', color: '#264DE4', bg: '#0d1530', icon: `${DEVICON}/css3/css3-original.svg`,
+    category: 'STYLE LAYER', desc: 'Handles layout, responsiveness, and visual polish across all web projects.' },
+  { name: 'JavaScript', abbr: 'JS', color: '#F7DF1E', bg: '#2d2900', icon: `${DEVICON}/javascript/javascript-original.svg`,
+    category: 'SCRIPTING ENGINE', desc: 'Core language for client-side interactivity, DOM manipulation, and async logic.' },
+  { name: 'PHP', abbr: 'PH', color: '#A855F7', bg: '#1d0b30', icon: `${DEVICON}/php/php-original.svg`,
+    category: 'SERVER LANGUAGE', desc: 'Powers backend logic and dynamic pages for server-rendered sites like Telex PH.' },
+  { name: 'MySQL', abbr: 'My', color: '#4479A1', bg: '#0d1e2f', icon: `${DEVICON}/mysql/mysql-original.svg`,
+    category: 'RELATIONAL DB', desc: 'Structured, SQL-based storage for relational data with joins and transactions.' },
+  { name: 'MongoDB', abbr: 'Mo', color: '#47A248', bg: '#0a1f0d', icon: `${DEVICON}/mongodb/mongodb-original.svg`,
+    category: 'NOSQL DATABASE', desc: 'Flexible, document-based storage used for rapid iteration and JSON-shaped data.' },
+  { name: 'Express', abbr: 'Ex', color: '#e0e0e0', bg: '#1a1a1a', icon: `${SIMPLEICON}/express/ffffff`,
+    category: 'API FRAMEWORK', desc: 'Minimal Node.js framework for building REST APIs and backend services.' },
+  { name: 'Node.js', abbr: 'No', color: '#339933', bg: '#0a1f0a', icon: `${DEVICON}/nodejs/nodejs-original.svg`,
+    category: 'RUNTIME ENGINE', desc: 'Server-side JavaScript runtime enabling full-stack development with one language.' },
 ]
 
-export const stats = { projects: 2, certificates: 1, completedWorks: 3 }
+export const stats = { projects: 3, certificates: 1, completedWorks: 3 }
