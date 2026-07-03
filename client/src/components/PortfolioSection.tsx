@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
-import { ArrowRight, ArrowLeft, Code2, Award, Cpu, Link as LinkIcon, ImageOff } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Code2, Award, Cpu, Link as LinkIcon, ImageOff, X } from 'lucide-react'
 import { projects, certificates, techStack, type Project, type TechItem } from '@/lib/data'
 
 const TABS = [
